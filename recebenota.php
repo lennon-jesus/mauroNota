@@ -21,8 +21,6 @@ $validadoral = $resultal->fetchAll();
 try {    
     if ($_GET['nota']<0 || $_GET['nota']>10 || $_GET['nota']==""){
         echo "Por favor preencha os campos corretamente";
-    }else if((in_array($_GET['turma'],$validador))==false || (in_array($_GET['aluno'],$validadoral))==false){
-        echo "Por favor, preencha os campos corretamente";
     }else{
         $comando = $conexao->prepare($codigoSQL);
 

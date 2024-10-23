@@ -2,17 +2,23 @@
 include 'conexao.php';
 
 echo "Recebido: <br>";
-echo $_GET['nome'];
-echo $_GET['turma'];
+$nomeVar = $_GET['nome'];
+$turmaVar = $_GET['turma'];
+echo $nomeVar;
+echo '<br>' . $turmaVar;
 echo "<br>";
 
 $codigoSQL = "INSERT INTO `alunos` (`id`, `nome`, `id_turma`) VALUES (NULL, :nm, :tr)";
 
+$comandoSQL2 = 'SELECT `id` FROM `turmas`';
+$result = $conexao->query($comandoSQL2);
+$validador = $result->fetchAll();
+var_dump($validador);
+echo (in_array($turmaVar,$validador));
+
 try {
-    $comandoSQL2 = 'SELECT `id` FROM `turmas`';
-    $result = $conexao->query($comandoSQL2);
-    $validador = $result->fetchAll();
-    if ($_GET['nome']=="" || (in_array($_GET['turma'],$validador))==false){
+
+    if ($nomeVar==""){
         echo "Por favor preencha os campos corretamente";
     }else{
         $comando = $conexao->prepare($codigoSQL);
